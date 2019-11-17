@@ -6,12 +6,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 public class OfficePasswordRemove extends javax.swing.JFrame {
 
-    
-    private File selectedFile = null; 
-    
+    private File selectedFile = null;
+
     public OfficePasswordRemove() {
         initComponents();
     }
@@ -82,6 +80,15 @@ public class OfficePasswordRemove extends javax.swing.JFrame {
         fileChooser.addChoosableFileFilter(filterExcel);
         fileChooser.setAcceptAllFileFilterUsed(false);
 
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        
+        File select = this.selectedFile;
+        if(select == null){
+            select = new File(this.fileTextField.getText());
+        }
+        
+        fileChooser.setCurrentDirectory(select);
+
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
 
@@ -93,13 +100,23 @@ public class OfficePasswordRemove extends javax.swing.JFrame {
 
     private void convertBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertBtnActionPerformed
         this.convertBtn.setEnabled(false);
-        new OfficePasswordRemover(this.selectedFile);
+
+        if (!this.selectedFile.isDirectory()) {
+            new OfficePasswordRemover(this.selectedFile);
+        } else {
+            File[] listOfFiles = this.selectedFile.listFiles();
+            for (File file : listOfFiles) {
+                if (file.isFile()) {
+                    new OfficePasswordRemover(file);
+                }
+            }
+        }
         this.convertBtn.setEnabled(true);
-         JOptionPane pane = new JOptionPane("Passwort entfernt");
+        JOptionPane pane = new JOptionPane("Passwort entfernt");
         JDialog dialog = pane.createDialog("OPR");
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
-        
+
     }//GEN-LAST:event_convertBtnActionPerformed
 
     /**
