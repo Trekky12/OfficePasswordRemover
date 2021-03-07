@@ -93,7 +93,7 @@ public class OfficePasswordRemover {
         // https://stackoverflow.com/a/43836969
         // https://stackoverflow.com/a/13787907
         // https://stackoverflow.com/a/14648600
-        try (FileSystem fs = FileSystems.newFileSystem(zipFile, null)) {
+        try (FileSystem fs = FileSystems.newFileSystem(zipFile)) {
             Path fileInsideZipPath = fs.getPath(initialFile);
             Files.copy(replacementFile, fileInsideZipPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

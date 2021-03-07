@@ -73,10 +73,12 @@ public class OfficePasswordRemove extends javax.swing.JFrame {
     private void fileChooserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserBtnActionPerformed
 
         FileNameExtensionFilter filterWord = new FileNameExtensionFilter("Word-Dokumente", "docx");
+        FileNameExtensionFilter filterWordTemplate = new FileNameExtensionFilter("Word-Vorlagen", "dotx");
         FileNameExtensionFilter filterExcel = new FileNameExtensionFilter("Excel-Dokumente", "xlsx");
         JFileChooser fileChooser = new JFileChooser();
         //fileChooser.setFileFilter(filter);
         fileChooser.addChoosableFileFilter(filterWord);
+        fileChooser.addChoosableFileFilter(filterWordTemplate);
         fileChooser.addChoosableFileFilter(filterExcel);
         fileChooser.setAcceptAllFileFilterUsed(false);
 
